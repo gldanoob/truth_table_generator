@@ -8,14 +8,12 @@
 #include "types.h"
 
 void table_gen(Wff *wff, int *props, int props_no) {
-    int i = 0, n = 0;
-    int r = 0;
+    int i = 0, n = 0, r = 0;
     while (n < props_no) {
         if (props[i]) {
             printf(" %c |", (char)(i + 'P' - 1));
             n++;
         }
-
         i++;
     }
     printf(" %s\n", wff_to_string(wff));

@@ -49,10 +49,9 @@ Wff *parseProp() {
 
 Wff *parseNot() {
     if (*s == 'n' && *(s + 1) == 'o' && *(s + 2) == 't') {
-        Wff *wff;
+        Wff *wff = makeWff();
         s += 3;
         skipSpace();
-        wff = makeWff();
         wff->op = NOT;
         wff->o2 = parseProp();
         return wff;
@@ -66,9 +65,8 @@ Wff *parseAnd() {
     Wff *o1 = parseNot();
     skipSpace();
     while (*s == 'a' && s[1] == 'n' && s[2] == 'd') {
-        Wff *wff, *o2;
+        Wff *wff = makeWff(), *o2;
         s += 3;
-        wff = makeWff();
         wff->op = AND;
         wff->o1 = o1;
 
@@ -88,9 +86,8 @@ Wff *parseOr() {
     Wff *o1 = parseAnd();
     skipSpace();
     while (*s == 'o' && s[1] == 'r') {
-        Wff *wff, *o2;
+        Wff *wff = makeWff(), *o2;
         s += 2;
-        wff = makeWff();
         wff->op = OR;
         wff->o1 = o1;
 
@@ -110,9 +107,8 @@ Wff *parseImp() {
     Wff *o1 = parseOr();
     skipSpace();
     if (*s == 't' && s[1] == 'h' && s[2] == 'e' && s[3] == 'n') {
-        Wff *wff, *o2;
+        Wff *wff = makeWff(), *o2;
         s += 4;
-        wff = makeWff();
         wff->op = IMPLIES;
         wff->o1 = o1;
 
@@ -130,9 +126,8 @@ Wff *parseIff() {
     Wff *o1 = parseImp();
     skipSpace();
     while (*s == 'i' && s[1] == 'f' && s[2] == 'f') {
-        Wff *wff, *o2;
+        Wff *wff = makeWff(), *o2;
         s += 3;
-        wff = makeWff();
         wff->op = IFF;
         wff->o1 = o1;
 
